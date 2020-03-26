@@ -2,6 +2,7 @@ package glue;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.AfterStep;
 import cucumber.api.java.Before;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;
@@ -74,5 +75,19 @@ public class MyStepdefs {
     public void after() throws Exception {
         tearDown();
     }
+
+    @After(value = "@all")
+    public void embedScreenshot(Scenario scenario) {
+        if (scenario.isFailed()) {
+            try {
+                byte[] screenshot = ((TakesScreenshot) getDriver())
+                        .getScreenshotAs(OutputType.BYTES);
+                scenario.embed(screenshot, "image/png");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
 

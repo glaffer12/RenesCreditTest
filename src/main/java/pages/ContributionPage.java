@@ -95,7 +95,7 @@ public class ContributionPage extends BasePage {
                     element = contributionResult;
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + title);
+                    throw new IllegalStateException("Данный параметр не предусмотрен: " + title);
             }
             Assert.assertEquals(value,element.getText());
     }
