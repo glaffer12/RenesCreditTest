@@ -76,18 +76,5 @@ public class MyStepdefs {
         tearDown();
     }
 
-    @After(value = "@all")
-    public void embedScreenshot(Scenario scenario) {
-        if (scenario.isFailed()) {
-            try {
-                byte[] screenshot = ((TakesScreenshot) getDriver())
-                        .getScreenshotAs(OutputType.BYTES);
-                scenario.embed(screenshot, "image/png");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 }
 
